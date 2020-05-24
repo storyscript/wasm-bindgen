@@ -137,10 +137,10 @@ impl<T: Hash> fmt::Display for ShortHash<T> {
         if !HASHED.load(SeqCst) {
             let mut h = DefaultHasher::new();
             env::var("CARGO_PKG_NAME")
-                .expect("should have CARGO_PKG_NAME env var")
+                .unwrap_or("web_executor".to_string())
                 .hash(&mut h);
             env::var("CARGO_PKG_VERSION")
-                .expect("should have CARGO_PKG_VERSION env var")
+                .unwrap_or("0.0.0".to_string())
                 .hash(&mut h);
             // This may chop off 32 bits on 32-bit platforms, but that's ok, we
             // just want something to mix in below anyway.

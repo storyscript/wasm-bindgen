@@ -13,17 +13,12 @@ edition = "2018"
 
 [lib]
 proc-macro = true
-
-[features]
-# spans = ["wasm-bindgen-macro-support/spans"]
-# xxx_debug_only_print_generated_code = []
-# strict-macro = ["wasm-bindgen-macro-support/strict-macro"]
+path = "src/lib.rs"
 
 [dependencies]
-wasm-bindgen-macro-support = { path = "../macro-support", version = "=0.2.62" }
-quote = "1.0"
+watt = "0.3"
 
 [dev-dependencies]
 trybuild = "1.0"
-wasm-bindgen = { path = "../..", version = "0.2.62", features = ['strict-macro'] }
+wasm-bindgen = { path = "../..", version = "0.2.62", features = [] }
 wasm-bindgen-futures = { path = "../futures", version = "0.4.12" }

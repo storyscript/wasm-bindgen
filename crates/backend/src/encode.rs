@@ -51,8 +51,8 @@ impl Interner {
         Interner {
             bump: bumpalo::Bump::new(),
             files: RefCell::new(HashMap::new()),
-            root: env::var_os("CARGO_MANIFEST_DIR").unwrap().into(),
-            crate_name: env::var("CARGO_PKG_NAME").unwrap(),
+            root: env::var_os("CARGO_MANIFEST_DIR").unwrap_or("./".to_string().into()).into(),
+            crate_name: env::var("CARGO_PKG_NAME").unwrap_or("web_executor".to_string()),
             has_package_json: Cell::new(false),
         }
     }

@@ -20,8 +20,8 @@ features = ["serde-serialize"]
 test = false
 
 [features]
-default = ["spans", "std"]
-spans = ["wasm-bindgen-macro/spans"]
+default = ["std"]
+# spans = ["wasm-bindgen-macro/spans"]
 std = []
 serde-serialize = ["serde", "serde_json", "std"]
 nightly = []
@@ -29,14 +29,15 @@ enable-interning = ["std"]
 
 # Whether or not the `#[wasm_bindgen]` macro is strict and generates an error on
 # all unused attributes
-strict-macro = ["wasm-bindgen-macro/strict-macro"]
+# strict-macro = ["wasm-bindgen-macro/strict-macro"]
+strict-macro = []
 
 # This is only for debugging wasm-bindgen! No stability guarantees, so enable
 # this at your own peril!
-xxx_debug_only_print_generated_code = ["wasm-bindgen-macro/xxx_debug_only_print_generated_code"]
+# xxx_debug_only_print_generated_code = ["wasm-bindgen-macro/xxx_debug_only_print_generated_code"]
 
 [dependencies]
-wasm-bindgen-macro = { path = "crates/macro", version = "=0.2.62" }
+wasm-bindgen-macro = { path = "crates/macro-watt", version = "=0.2.62" }
 serde = { version = "1.0", optional = true }
 serde_json = { version = "1.0", optional = true }
 cfg-if = "0.1.9"
@@ -54,6 +55,7 @@ members = [
   "benchmarks",
   "crates/cli",
   "crates/js-sys",
+  "crates/macro-watt-tmp",
   "crates/test",
   "crates/test/sample",
   "crates/typescript-tests",
@@ -94,3 +96,9 @@ wasm-bindgen = { path = '.' }
 wasm-bindgen-futures = { path = 'crates/futures' }
 js-sys = { path = 'crates/js-sys' }
 web-sys = { path = 'crates/web-sys' }
+proc-macro2 = {git = "https://github.com/dtolnay/watt"}
+syn = {git = "https://github.com/jakobhellermann/syn-watt"}
+
+# uncomment Cargo.toml patch proc-macro2 / syn
+# cd ./crates/macro-watt-tmp && cargo build --target wasm32-unknown-unknown --release
+# cp target/release ... NAME.wasm to crates/macro-watt/src

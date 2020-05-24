@@ -1,5 +1,5 @@
 [package]
-name = "wasm-bindgen-macro"
+name = "wasm-bindgen-macro-watt"
 version = "0.2.62"
 authors = ["The wasm-bindgen Developers"]
 license = "MIT/Apache-2.0"
@@ -12,7 +12,8 @@ Definition of the `#[wasm_bindgen]` attribute, an internal dependency
 edition = "2018"
 
 [lib]
-proc-macro = true
+proc-macro = false
+crate-type = ["cdylib"]
 
 [features]
 # spans = ["wasm-bindgen-macro-support/spans"]
@@ -22,8 +23,13 @@ proc-macro = true
 [dependencies]
 wasm-bindgen-macro-support = { path = "../macro-support", version = "=0.2.62" }
 quote = "1.0"
+proc-macro2 = "1.0"
 
 [dev-dependencies]
 trybuild = "1.0"
 wasm-bindgen = { path = "../..", version = "0.2.62", features = ['strict-macro'] }
 wasm-bindgen-futures = { path = "../futures", version = "0.4.12" }
+
+[patch.crates-io]
+proc-macro2 = {git = "https://github.com/dtolnay/watt"}
+syn = {git = "https://github.com/jakobhellermann/syn-watt"}
